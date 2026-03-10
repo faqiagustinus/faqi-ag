@@ -1,11 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CipherController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
-Route::get('/', [CipherController::class, 'index']);
-Route::post('/process', [CipherController::class, 'process'])->name('cipher.process');
+Route::get('/login', function () {
+    return view('login');
+});
+
+Route::post('/login', function () {
+    return redirect('/dashboard');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+});
