@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cipher . p balap</title>
+    <title>cipher . caesar</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
@@ -145,7 +145,7 @@
         <!-- header simpel aja, ga perlu gradien norak -->
         <div class="flex items-center justify-between mb-7">
             <div>
-                <h1 class="text-2xl font-medium text-[#dde3ed] tracking-tight">cipher . p balap</h1>
+                <h1 class="text-2xl font-medium text-[#dde3ed] tracking-tight">cipher . caesar</h1>
                 <div class="flex items-center gap-2 mt-1">
                     <span class="tag">caesar</span>
                     <span class="tag">shift 1-25</span>
