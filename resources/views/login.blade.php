@@ -1,19 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login</title>
-</head>
-<body>
+<?php
 
-<h1>Halaman Login</h1>
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CaesarController;
 
-<form action="/login" method="POST">
-    @csrf
 
-    
+// halaman login
+Route::get('/', function () {
+    return view('login');
+});
 
-    <button type="submit">Login</button>
-</form>
 
-</body>
-</html>
+Route::get('/login', function () {
+    return view('login');
+});
+
+        
+// halaman dashboard
+Route::get('/dashboard', function () {
+    return view('dashboard');
+});
+
+   
+Route::get('/caesar', [CaesarController::class, 'index']);
+Route::post('/caesar/process', [CaesarController::class, 'process']);
