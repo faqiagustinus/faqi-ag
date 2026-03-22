@@ -1,48 +1,63 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\PenggunaController;
+use App\Http\Controllers\CaesarController;
 
-Route::get('/login', function () {
-    if (Auth::check()) {
-        return redirect('/dashboard');
-    }
-    return view('login');
-})->name('login');
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+*/
 
-Route::post('/login', function (Request $request) {
-    $credentials = $request->validate([
-        'email'    => ['required', 'email'],
-        'password' => ['required'],
-    ]);
+// =======================
+// 🔐 LOGIN MANUAL
+// =======================
 
-    if (Auth::attempt($credentials)) {
-        $request->session()->regenerate();
-        return redirect('/dashboard');
-    }
+// halaman login
+Route::get('/login', [PenggunaController::class, 'loginForm'])->name('login');
 
-    return back()
-        ->withInput($request->only('email'))
-        ->withErrors(['email' => 'Email atau password salah.']);
-});
+// proses login
+Route::post('/login', [PenggunaController::class, 'login']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware('auth')->name('dashboard');
+// dashboard (sudah dicek session di controller)
+Route::get('/dashboard', [PenggunaController::class, 'dashboard'])->name('dashboard');
 
-Route::post('/logout', function (Request $request) {
-    Auth::logout();
-    $request->session()->invalidate();
-    $request->session()->regenerateToken();
+// logout
+Route::post('/logout', [PenggunaController::class, 'logout'])->name('logout');
+
+
+// =======================
+// 👤 PENGGUNA
+// =======================
+
+// halaman contoh
+Route::get('/halo-maba-sti', [PenggunaController::class, 'index']);
+
+// simpan pengguna (kalau kamu pakai form)
+Route::post('/simpan-pengguna', [PenggunaController::class, 'create']);
+
+
+// =======================
+// 🔐 CAESAR CIPHER
+// =======================
+
+// halaman utama caesar
+Route::get('/caesar/{jenis?}', [CaesarController::class, 'index']);
+
+// proses form biasa
+Route::post('/caesar-process', [CaesarController::class, 'process']);
+
+// proses via JSON (API-like)
+Route::post('/caesar-process-json', [CaesarController::class, 'processJson']);
+Route::post('/caesar-process', [CaesarController::class, 'process']);
+
+
+// =======================
+// 🚀 DEFAULT REDIRECT
+// =======================
+
+// kalau buka "/" langsung ke login
+Route::get('/', function () {
     return redirect('/login');
-})->name('logout');
-
-Route::get('/halo-maba-sti', [\App\Http\Controllers\PenggunaController::class, 'index']);
-Route::post('/simpan-pengguna', [\App\Http\Controllers\PenggunaController::class, 'create']);
-Route::get('/caesar/{jenis?}', [\App\Http\Controllers\CaesarController::class, 'index']);
-Route::post('/caesar-process', [\App\Http\Controllers\CaesarController::class, 'process']);
-Route::post('/caesar-process-json', [\App\Http\Controllers\CaesarController::class, 'processJson']);
-// Route::get('/halo-maba-sti', function () {
-//     return 'Halo dek';
-// });
+});
