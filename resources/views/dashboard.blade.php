@@ -91,7 +91,7 @@
     <!-- Hero Section -->
     <section id="hero" class="hero section dark-background">
 
-      <img src="{{ asset('assets/img/profile/WhatsApp Image 2026-03-25 at 22.36.50.jpeg') }}" 
+      <img src="{{ asset('assets/img/profile/WhatsApp Image 2026-03-25 at 23.23.50.jpeg') }}" 
      class="img-fluid"
      alt=""
      data-aos="fade-in">
