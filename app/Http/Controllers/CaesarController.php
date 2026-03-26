@@ -13,8 +13,7 @@ class CaesarController extends Controller
 
     public function process(Request $request)
     {
-        $text = $request->text;
-        $shift = $request->shift;
+        $text = $request->text; $shift = $request->shift;
         $mode = $request->action;
 
         $result = '';

@@ -60,4 +60,4 @@ Route::post('/caesar-process', [CaesarController::class, 'process']);
 // kalau buka "/" langsung ke login
 Route::get('/', function () {
     return redirect('/login');
-});
+    });

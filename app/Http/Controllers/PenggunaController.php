@@ -11,7 +11,7 @@ class PenggunaController extends Controller
 {
     public function loginForm()
     {
-        return view('login');
+         return view('login');
     }
 
     public function login(Request $request)

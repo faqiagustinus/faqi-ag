@@ -11,7 +11,6 @@
             justify-content: center;
             align-items: center;
         }
-
         .login-box {
             background: white;
             padding: 30px;
@@ -23,8 +22,7 @@
         h2 {
             text-align: center;
         }
-
-        input {
+ input {
             width: 100%;
             padding: 10px;
             margin-top: 10px;
@@ -39,20 +37,17 @@
             color: white;
             cursor: pointer;
         }
-
-        button:hover {
+              button:hover {
             background: #00c6ff;
         }
-
-        .error {
+.error {
             color: red;
             text-align: center;
         }
     </style>
 </head>
 <body>
-
-<div class="login-box">
+    <div class="login-box">
     <h2>Login</h2>
 
     @if(session('error'))
