@@ -17,7 +17,7 @@ Route::post('/login', [PenggunaController::class, 'login']);
 Route::get('/dashboard', [PenggunaController::class, 'dashboard'])->name('dashboard');
 Route::post('/logout', [PenggunaController::class, 'logout'])->name('logout');
 
-Route::get('/halo-maba-sti', [PenggunaController::class, 'index']);
+Route::get('/index', [PenggunaController::class, 'index']);
 Route::post('/simpan-pengguna', [PenggunaController::class, 'create']);
 
 Route::get('/caesar/{jenis?}', [CaesarController::class, 'index']);

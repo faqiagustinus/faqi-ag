@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class PenggunaController extends Controller
-    //
-
-
 {
     public function loginForm()
     {
@@ -16,22 +14,26 @@ class PenggunaController extends Controller
 
     public function login(Request $request)
     {
-        if ($request->email == "faqi@gmail.com" && $request->password == "12345") {
-            session(['user' => $request->email]);
+        $user = User::where('email', $request->email)
+                    ->where('password', $request->password)
+                    ->first();
+
+        if ($user) {
+            session(['user' => $user->email]);
             return redirect('/dashboard');
         }
 
         return back()->with('error', 'Email atau password salah');
     }
 
-    public function dashboard()
-    {
-        if (!session('user')) {
-            return redirect('/login');
-        }
-
-        return view('dashboard');
+   public function dashboard()
+{
+    if (!session('user')) {
+        return redirect('/login');
     }
+
+    return view('daftar_pengguna');
+}
 
     public function logout()
     {
@@ -41,7 +43,7 @@ class PenggunaController extends Controller
 
     public function index()
     {
-        return "Halo dari controller";
+        return "riyan birahi";
     }
 
     public function create()
