@@ -9,7 +9,7 @@ class PenggunaController extends Controller
 {
     public function loginForm()
     {
-         return view('login');
+        return view('login');
     }
 
     public function login(Request $request)
@@ -32,7 +32,10 @@ class PenggunaController extends Controller
         return redirect('/login');
     }
 
-    return view('daftar_pengguna');
+    $dataPengguna = User::all();
+
+    
+    return view('daftar_pengguna', compact('dataPengguna'));
 }
 
     public function logout()

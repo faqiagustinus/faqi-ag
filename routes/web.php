@@ -4,13 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PenggunaController;
 use App\Http\Controllers\CaesarController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-*/
-
-Route::redirect('/', '/login');
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::get('/login', [PenggunaController::class, 'loginForm'])->name('login');
 Route::post('/login', [PenggunaController::class, 'login']);
