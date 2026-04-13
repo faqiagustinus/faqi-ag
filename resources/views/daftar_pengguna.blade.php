@@ -44,31 +44,56 @@
 </style>
 
 <h1>Data Pengguna</h1>
+<div class="mb-3">
+    <a href="{{ route('pengguna.create') }}" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Tambah Pengguna Baru
+    </a>
+</div>
 
-<table>
-    <thead>
+<table class="table table-bordered" style="width:100%">
+
+</table>
+<table class="table table-bordered" style="width:100%">
+    <thead class="table-primary">
         <tr>
             <th>ID</th>
             <th>Email</th>
             <th>Password</th>
             <th>Created_at</th>
             <th>Updated_at</th>
+            <th class="text-center" width="180">Aksi</th>
         </tr>
     </thead>
     <tbody>
-        @forelse($dataPengguna as $pengguna)
-            <tr>
-                <td>{{ $pengguna->id }}</td>
-                <td>{{ $pengguna->email }}</td>
-                <td>{{ $pengguna->password }}</td>
-                <td>{{ $pengguna->created_at ? $pengguna->created_at->format('Y-m-d H:i:s') : '-' }}</td>
-                <td>{{ $pengguna->updated_at ? $pengguna->updated_at->format('Y-m-d H:i:s') : '-' }}</td>
-            </tr>
-        @empty
-            <tr>
-                <td colspan="5" style="text-align: center; padding: 30px;">Belum ada data pengguna</td>
-            </tr>
-        @endforelse
+        @foreach($dataPengguna as $pengguna)
+        <tr>
+            <td>{{ $pengguna->id }}</td>
+            <td>{{ $pengguna->email }}</td>
+            <td>{{ $pengguna->password }}</td>
+            <td>{{ $pengguna->created_at ? $pengguna->created_at->format('Y-m-d H:i:s') : '-' }}</td>
+            <td>{{ $pengguna->updated_at ? $pengguna->updated_at->format('Y-m-d H:i:s') : '-' }}</td>
+            
+            <td class="text-center">
+                <!-- Tombol Edit -->
+                <a href="{{ route('pengguna.edit', $pengguna->id) }}" 
+                   class="btn btn-warning btn-sm me-1">
+                    <i class="fas fa-edit"></i> Edit
+                </a>
+                
+                <!-- Tombol Hapus -->
+                <form action="{{ route('pengguna.destroy', $pengguna->id) }}" 
+                      method="POST" 
+                      style="display: inline;"
+                      onsubmit="return confirm('Yakin ingin menghapus user ini?')">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm">
+                        <i class="fas fa-trash"></i> Hapus
+                    </button>
+                </form>
+            </td>
+        </tr>
+        @endforeach
     </tbody>
 </table>
 
